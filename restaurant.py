@@ -1,2 +1,3 @@
 class Table:
-    pass
+    def __init__(self):
+        self.name = "Table"
