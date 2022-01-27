@@ -16,3 +16,15 @@ class Table:
         if len(self.bill) == 0:
             self.bill.append({"item": item, "price": price, "quantity": quantity})
 
+
+    def remove(self, item, price, quantity=1):
+        for i in self.bill:
+            if i and i["item"] == item:
+                i["quantity"] -= quantity
+                print("first condition true")
+            elif i["item"] != item:
+                return False
+
+        if len(self.bill) == 0:
+            return False
+
