@@ -6,9 +6,8 @@ class Table:
 
     def order(self, item, price, quantity=1):
         for i in self.bill:
-            if i and i["item"] == item:
+            if i["item"] == item:
                 i["quantity"] += quantity
-            # i["item"] != item:
             else:
                 self.bill.append({"item": item, "price": float(price), "quantity": quantity})
 
@@ -37,7 +36,7 @@ class Table:
         for i in self.bill:
             subtotal += i["quantity"] * float(i["price"])
             total = subtotal + subtotal * service_charge
-        return {'Sub Total': f"£{subtotal}", 'Service Charge': f"£{subtotal * service_charge}", 'Total': total}
+        return {'Sub Total': f"£{(subtotal)}", 'Service Charge': f"£{float('{:.2f}'.format(subtotal * service_charge))}", 'Total': total}
 
     def split_bill(self):
         return int(self.get_total()["Total"]) / self.number_of_people
@@ -46,7 +45,7 @@ class Table:
 table02 = Table(2)
 
 table02.order('Food1', 10.00, 3)
-table02.order('Food2', 20.00, 1)
+# table02.order('Food2', 20.00, 1)
 table02.order('Food3', 0.50, 1)
 
-table02.get_subtotal()
+print(table02.get_subtotal())
