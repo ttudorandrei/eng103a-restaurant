@@ -8,8 +8,10 @@ class Table:
         for i in self.bill:
             if i["item"] == item:
                 i["quantity"] += quantity
+                return
             else:
                 self.bill.append({"item": item, "price": float(price), "quantity": quantity})
+                return
 
         if len(self.bill) == 0:
             self.bill.append({"item": item, "price": float(price), "quantity": quantity})
@@ -36,7 +38,7 @@ class Table:
         for i in self.bill:
             subtotal += i["quantity"] * float(i["price"])
             total = subtotal + subtotal * service_charge
-        return {'Sub Total': f"£{(subtotal)}", 'Service Charge': f"£{float('{:.2f}'.format(subtotal * service_charge))}", 'Total': total}
+        return {'Sub Total': f"£{float('{:.1f}'.format(subtotal))}", 'Service Charge': f"£{float('{:.1f}'.format(subtotal * service_charge))}", 'Total': f"£{total}"}
 
     def split_bill(self):
         return int(self.get_total()["Total"]) / self.number_of_people
